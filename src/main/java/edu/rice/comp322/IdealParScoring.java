@@ -1,11 +1,28 @@
 package edu.rice.comp322;
 
 import edu.rice.hj.api.SuspendableException;
+import static edu.rice.hj.Module0.*;
+import static edu.rice.hj.Module1.*;
 
 /**
  * A scorer that works in parallel.
  */
 public class IdealParScoring extends AbstractDnaScoring {
+    /*
+     * Fields
+     */
+    /**
+     * The length of the first sequence
+     */
+    private final int xLength;
+    /**
+     * The length of the second sequence
+     */
+    private final int yLength;
+    /**
+     * The Smith-Waterman matrix
+     */
+    private final int[][] s;
 
     /**
      * <p>main.</p> Takes the names of two files, and in parallel calculates the sequence aligment scores of the two DNA
@@ -28,10 +45,24 @@ public class IdealParScoring extends AbstractDnaScoring {
         if (xLength <= 0 || yLength <= 0) {
             throw new IllegalArgumentException("Lengths (" + xLength + ", " + yLength + ") must be positive!");
         }
+        this.xLength = xLength;
+        this.yLength = yLength;
+        // Preallocate the matrix for alignment, dimension+1 to initialize the matrix
+        this.s = new int[xLength + 1][yLength + 1];
 
-        // TODO: implement this!
+        // Initialize the row of the matrix
+        for (int ii = 1; ii < xLength + 1; ii++) {
+            this.s[ii][0] = getScore(1, 0) * ii;
+        }
 
-        throw new UnsupportedOperationException("Parallel allocation not implemented yet!");
+        // Initialize the row of the matrix
+        for (int jj = 1; jj < yLength + 1; jj++) {
+            this.s[0][jj] = getScore(0, 1) * jj;
+        }
+        // Initialize diagnal
+        this.s[0][0] = 0;
+        //Testing
+        printMatrix(this.s);
     }
 
     /**
@@ -41,10 +72,29 @@ public class IdealParScoring extends AbstractDnaScoring {
      */
     public int scoreSequences(final String x, final String y) throws SuspendableException {
 
-        // TODO: implement this in parallel!
+        forseq(1, this.xLength + this.yLength - 1, (k) -> {
+            forall(1, k, (j) -> {
+                int i = k - j + 1;
+                if (i <= this.xLength & j <= this.yLength) {
+                    final char XChar = x.charAt(i - 1);
+                    final char YChar = y.charAt(j - 1);
 
-        throw new UnsupportedOperationException("Parallel scoring not implemented yet!");
+                    // find the largest point to jump from, and use it
+                    final int diagScore = this.s[i - 1][j - 1] + getScore(charMap(XChar), charMap(YChar));
+                    final int topColScore = this.s[i - 1][j] + getScore(charMap(XChar), 0);
+                    final int leftRowScore = this.s[i][j - 1] + getScore(0, charMap(YChar));
+                    doWork(1);
+                    this.s[i][j] = Math.max(diagScore, Math.max(leftRowScore, topColScore));
+                }
+            });
+        });
+        printMatrix(this.s);
+        return this.s[xLength][yLength];
     }
 
 }
+
+
+
+
 
