@@ -1,6 +1,7 @@
 package edu.rice.comp322;
 
 import edu.rice.hj.api.SuspendableException;
+
 import static edu.rice.hj.Module0.*;
 import static edu.rice.hj.Module1.*;
 
@@ -9,18 +10,18 @@ import static edu.rice.hj.Module1.*;
  */
 public class IdealParScoring extends AbstractDnaScoring {
     /*
-     * Fields
+     * Fields.
      */
     /**
-     * The length of the first sequence
+     * The length of the first sequence.
      */
     private final int xLength;
     /**
-     * The length of the second sequence
+     * The length of the second sequence.
      */
     private final int yLength;
     /**
-     * The Smith-Waterman matrix
+     * The Smith-Waterman matrix.
      */
     private final int[][] s;
 
