@@ -137,12 +137,7 @@ public class UsefulParScoring extends AbstractDnaScoring {
         // 3. Scoring.
         finish(()-> {
             // Iterate over DDF matrix.
-//            forall(1, numXPartition, (i)->{
-//
-//            });
             for (int i = 1; i <= numXPartition; i++) {
-//            forall(1, numXPartition, 1, numYPartition, (i, j)->{
-
                 for (int j = 1; j <= numYPartition; j++) {
                     final int ii = i;
                     final int jj = j;
