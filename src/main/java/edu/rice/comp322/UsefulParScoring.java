@@ -2,6 +2,7 @@ package edu.rice.comp322;
 
 import edu.rice.hj.api.SuspendableException;
 import edu.rice.hj.api.*;
+
 import static edu.rice.hj.Module0.*;
 import static edu.rice.hj.Module1.*;
 
@@ -73,16 +74,8 @@ public class UsefulParScoring extends AbstractDnaScoring {
     /**
      * This is a sequential implementation of the Smith-Waterman alignment algorithm used for sub-matrices in the parallel
      * implementation of scoreSequences.
-     * @param x The first sequence to be compared.
-     * @param y The second sequence to be compared.
-     * @param rowStart The first index in a row.
-     * @param colStart The first index in a column.
-     * @param rowEnd The last index in a row.
-     * @param colEnd The last index in a column.
-     * @return final score of the baby matrix
-     * @throws SuspendableException
      */
-    public int scoreBabySequences(final String x, final String y, int rowStart, int colStart, int rowEnd, int colEnd){
+    public int scoreBabySequences(final String x, final String y, int rowStart, int colStart, int rowEnd, int colEnd) {
         for (int row = rowStart; row <= rowEnd; row++) {
             for (int col = colStart; col <= colEnd; col++) {
                 // the two characters to be compared
@@ -142,7 +135,7 @@ public class UsefulParScoring extends AbstractDnaScoring {
         }
 
         // 3. Scoring.
-        finish(()->{
+        finish(()-> {
             // Iterate over DDF matrix.
 //            forall(1, numXPartition, (i)->{
 //

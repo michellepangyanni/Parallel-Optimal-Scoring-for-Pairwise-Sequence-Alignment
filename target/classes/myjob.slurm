@@ -18,7 +18,7 @@ pwd
 echo SLURM_NODELIST=$SLURM_NODELIST
 echo USER=$USER
 
-export HW3_FOLDER=/home/yp29/hw3-michellepangyanni # TODO: Update this path to point to your hw 3 folder
+export HW3_FOLDER=/home/$USER/hw3-michellepangyanni # TODO: Update this path to point to your hw 3 folder
 
 if [[ ! -d $HW3_FOLDER ]]; then
     echo "The designated HW 3 folder ($HW3_FOLDER) does not seem to exist"
