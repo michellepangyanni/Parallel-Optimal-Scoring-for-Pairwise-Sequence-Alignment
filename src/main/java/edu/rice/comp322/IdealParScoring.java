@@ -56,11 +56,11 @@ public class IdealParScoring extends AbstractDnaScoring {
             this.s[ii][0] = getScore(1, 0) * ii;
         }
 
-        // Initialize the row of the matrix
+        // Initialize the first column
         for (int jj = 1; jj < yLength + 1; jj++) {
             this.s[0][jj] = getScore(0, 1) * jj;
         }
-        // Initialize diagnal
+        // Initialize top left corner
         this.s[0][0] = 0;
         //Testing
         printMatrix(this.s);

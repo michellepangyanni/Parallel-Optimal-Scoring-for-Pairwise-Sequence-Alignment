@@ -6,7 +6,7 @@
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=16000m
 #SBATCH --time=00:30:00
-#SBATCH --mail-user=NETID@rice.edu # TODO: Input your net id
+#SBATCH --mail-user=yp29@rice.edu # TODO: Input your net id
 #SBATCH --mail-type=ALL
 #SBATCH --export=ALL
 #SBATCH --partition=scavenge
@@ -18,7 +18,7 @@ pwd
 echo SLURM_NODELIST=$SLURM_NODELIST
 echo USER=$USER
 
-export HW3_FOLDER=/home/$USER/hw_3 # TODO: Update this path to point to your hw 3 folder
+export HW3_FOLDER=/home/$USER/hw3-michellepangyanni # TODO: Update this path to point to your hw 3 folder
 
 if [[ ! -d $HW3_FOLDER ]]; then
     echo "The designated HW 3 folder ($HW3_FOLDER) does not seem to exist"

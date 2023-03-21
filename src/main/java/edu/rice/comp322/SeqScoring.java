@@ -40,7 +40,6 @@ public class SeqScoring extends AbstractPreallocatedSorting {
                 S[i][j] = Math.max(diagScore, Math.max(leftRowScore, topColScore));
             }
         }
-
         // final value in the matrix is the score
         return S[xLength][yLength];
     }
